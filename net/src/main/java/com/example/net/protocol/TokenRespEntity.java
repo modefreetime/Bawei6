@@ -1,4 +1,4 @@
-package com.example.net.common;
+package com.example.net.protocol;
 
 public class TokenRespEntity {
     private String access_token;

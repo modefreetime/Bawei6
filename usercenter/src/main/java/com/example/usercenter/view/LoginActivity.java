@@ -1,45 +1,56 @@
 package com.example.usercenter.view;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
+import com.example.common.utils.LogUtils;
 import com.example.core.view.BaseActivity;
+import com.example.net.RetrofitFactory;
+import com.example.net.protocol.BaseRespEntity;
+import com.example.net.protocol.TokenRespEntity;
+import com.example.net.rx.RXJAVA;
 import com.example.usercenter.R;
 import com.example.usercenter.databinding.ActivityLoginBinding;
+import com.example.usercenter.entity.UserEntity;
+import com.example.usercenter.model.api.UserApi;
 import com.example.usercenter.viewmodel.UserViewModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewModel> {
 
 
-    public void loginOnclick(View view){
+    public void loginOnclick(View view) {
         String username = vm.userEntity.getUsername();
         String pwd = vm.userEntity.getPwd();
-        if(TextUtils.isEmpty(username)){
-            showMsg(this,getResources().getString(R.string.user_input_username));
-            return;
-        }if(TextUtils.isEmpty(pwd)){
-            showMsg(this,getResources().getString(R.string.user_input_pwd));
+        if (TextUtils.isEmpty(username)) {
+            showMsg(this, getResources().getString(R.string.user_input_username));
             return;
         }
-        LiveData<Boolean> result = vm.login();
-        if(result.getValue()){
-            showMsg(this,getResources().getString(R.string.user_login_success));
-
-        }else{
-            showMsg(this,getResources().getString(R.string.user_login_failed));
-
+        if (TextUtils.isEmpty(pwd)) {
+            showMsg(this, getResources().getString(R.string.user_input_pwd));
+            return;
         }
-        result.observe(LoginActivity.this, new Observer<Boolean>() {
+        LiveData<BaseRespEntity<UserEntity>> result = vm.login();
+//        if(result.getValue()){
+//            showMsg(this,getResources().getString(R.string.user_login_success));
+//
+//        }else{
+//            showMsg(this,getResources().getString(R.string.user_login_failed));
+//        }
+        result.observe(this, new Observer<BaseRespEntity<UserEntity>>() {
             @Override
-            public void onChanged(Boolean aBoolean) {
-
+            public void onChanged(BaseRespEntity<UserEntity> userEntityBaseRespEntity) {
+                if (userEntityBaseRespEntity != null) {
+                    showMsg(LoginActivity.this, "成功");
+                } else {
+                    showMsg(LoginActivity.this, "失败");
+                }
             }
         });
     }
@@ -60,5 +71,25 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
         binding.setCommand(this);
     }
 
+    public void changeUrlClick(View view) {
+        UserApi userApi = RetrofitFactory
+                .getInstance()
+                .create(UserApi.class);
+        userApi.getTest()
+                .enqueue(new Callback<TokenRespEntity>() {
+                    @Override
+                    public void onResponse(Call<TokenRespEntity> call, Response<TokenRespEntity> response) {
+                        LogUtils.d("SUCCESS");
+                    }
+
+                    @Override
+                    public void onFailure(Call<TokenRespEntity> call, Throwable t) {
+                        LogUtils.d(t.getMessage());
+                    }
+                });
+    }
+    public void latestClick(View view){
+        RXJAVA.test();
+    }
 
 }

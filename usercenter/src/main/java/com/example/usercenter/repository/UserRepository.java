@@ -3,6 +3,7 @@ package com.example.usercenter.repository;
 import androidx.lifecycle.LiveData;
 
 import com.example.core.repository.Repository;
+import com.example.net.protocol.BaseRespEntity;
 import com.example.usercenter.entity.UserEntity;
 import com.example.usercenter.model.UserModel;
 
@@ -15,7 +16,7 @@ public class UserRepository extends Repository<UserModel> {
         return new UserModel();
     }
 
-    public LiveData<Boolean> login(UserEntity entity){
+    public LiveData<BaseRespEntity<UserEntity>> login(UserEntity entity){
       return mModel.login(entity);
     }
 
