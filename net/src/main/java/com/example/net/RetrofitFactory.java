@@ -1,5 +1,6 @@
 package com.example.net;
 
+import android.os.Build;
 import android.text.TextUtils;
 
 import com.example.net.common.Config;
@@ -63,8 +64,8 @@ public class RetrofitFactory {
     private OkHttpClient createOkhttpClient() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .readTimeout(Config.TIME_OUT, TimeUnit.SECONDS)
-                .connectTimeout(Config.TIME_OUT,TimeUnit.SECONDS)
-                .writeTimeout(Config.TIME_OUT,TimeUnit.SECONDS)
+                .connectTimeout(Config.TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(Config.TIME_OUT, TimeUnit.SECONDS)
                 .addNetworkInterceptor(createNetWorkInterceptor())
                 .addInterceptor(tokenInterceptor())
                 .addInterceptor(headerParamsInterceptor())
@@ -76,15 +77,30 @@ public class RetrofitFactory {
 
     /**
      * 头信息兰拦截器
+     *
      * @return
      */
     private Interceptor headerParamsInterceptor() {
+        Interceptor interceptor = new Interceptor() {
 
-        return null;
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                Request newRequest = request.newBuilder()
+                        .addHeader("v0", Build.MANUFACTURER)
+                        .addHeader("v1", Build.MODEL)
+                        .addHeader("v2", Build.TYPE)
+                        .addHeader("v3", Build.VERSION.SDK_INT+"")
+                        .build();
+                return chain.proceed(newRequest);
+            }
+        };
+        return interceptor;
     }
 
     /**
      * token拦截器
+     *
      * @return
      */
     private Interceptor tokenInterceptor() {
@@ -95,12 +111,12 @@ public class RetrofitFactory {
                 Request request = chain.request();
                 Response proceed = chain.proceed(request);
 
-                if(checkHttpCode401(proceed)){
-                   String token =requestToken();
-                   if(TextUtils.isEmpty(token)){
-                       return proceed;
-                   }
-                    Request.Builder builder = request.newBuilder().addHeader("Authorization", "bearer "+token);
+                if (checkHttpCode401(proceed)) {
+                    String token = requestToken();
+                    if (TextUtils.isEmpty(token)) {
+                        return proceed;
+                    }
+                    Request.Builder builder = request.newBuilder().addHeader("Authorization", "bearer " + token);
                     Request newRequest = builder.build();
                     return chain.proceed(newRequest);
                 }
@@ -113,32 +129,33 @@ public class RetrofitFactory {
     }
 
     private String requestToken() {
-       TokenApi tokenApi= create(TokenApi.class);
-       Call<TokenRespEntity> tokenService= tokenApi.getToken("password",Config.AUTH_CODE,"");
-       try {
-          retrofit2.Response<TokenRespEntity> result= tokenService.execute();
-          if(result!=null && result.body()!=null){
-              return result.body().getAccess_token();
-          }
-       }catch (IOException e){
+        TokenApi tokenApi = create(TokenApi.class);
+        Call<TokenRespEntity> tokenService = tokenApi.getToken("password", Config.AUTH_CODE, "");
+        try {
+            retrofit2.Response<TokenRespEntity> result = tokenService.execute();
+            if (result != null && result.body() != null) {
+                return result.body().getAccess_token();
+            }
+        } catch (IOException e) {
 
-       }
-       return "";
+        }
+        return "";
     }
 
     private boolean checkHttpCode401(Response proceed) {
-        if(proceed==null){
+        if (proceed == null) {
             return false;
         }
-        if(proceed.code()==401){
+        if (proceed.code() == 401) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
     /**
      * 网络请求的拦截器
+     *
      * @return
      */
     private Interceptor createNetWorkInterceptor() {
@@ -147,7 +164,7 @@ public class RetrofitFactory {
         return interceptor;
     }
 
-    public <T>T create(Class<T> service){
+    public <T> T create(Class<T> service) {
         return retrofit.create(service);
     }
 
