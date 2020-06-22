@@ -1,15 +1,15 @@
 apply plugin: 'com.android.library'
-
+def appInfo = rootProject.ext.Android
+def urls=rootProject.ext.url
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
-
-
+    compileSdkVersion appInfo.compileSdkVersion
+    buildToolsVersion appInfo.buildToolsVersion
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion appInfo.minSdkVersion
+        targetSdkVersion appInfo.targetSdkVersion
+        versionCode appInfo.versionCode
+        versionName appInfo.versionName
+
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -17,8 +17,12 @@ android {
 
     buildTypes {
         release {
+            buildConfigField("String","baseUrl","\""+urls.release+"\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            buildConfigField("String","baseUrl","\""+urls.debug+"\"")
         }
     }
 
@@ -31,4 +35,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':common')
 }
