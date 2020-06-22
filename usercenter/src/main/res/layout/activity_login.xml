@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.usercenter.viewmodel.UserViewModel" />
+    <variable
+        name="command"
+        type="com.example.usercenter.view.LoginActivity" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:text="@={vm.userEntity.username}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/user_input_username" />
+
+        <EditText
+            android:text="@={vm.userEntity.pwd}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/user_input_pwd" />
+
+        <Button
+            android:onClick="@{command::loginOnclick}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_ui_btnlogin" />
+    </LinearLayout>
+
+</layout>

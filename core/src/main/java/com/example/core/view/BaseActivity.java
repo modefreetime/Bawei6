@@ -1,12 +1,13 @@
 package com.example.core.view;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-
 import com.example.core.viewmodel.BaseViewModel;
 
 /**
@@ -23,6 +24,7 @@ public abstract class BaseActivity<Binding extends ViewDataBinding,VM extends Ba
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         vm=createVm();
+        initBinding();
     }
 
     /**
@@ -36,4 +38,11 @@ public abstract class BaseActivity<Binding extends ViewDataBinding,VM extends Ba
      * @return
      */
     protected abstract int getLayoutId();
+
+    protected abstract void initBinding();
+
+    protected  void showMsg(Context context,String msg){
+        Toast.makeText(context, ""+msg, Toast.LENGTH_SHORT).show();
+    }
+
 }
