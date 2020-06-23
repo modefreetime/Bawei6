@@ -3,9 +3,12 @@ package com.example.net;
 import android.os.Build;
 import android.text.TextUtils;
 
+import com.example.common.utils.LogUtils;
+import com.example.net.calladapter.LiveDataCallAdapterFactory;
 import com.example.net.common.Config;
 import com.example.net.api.TokenApi;
 import com.example.net.protocol.TokenRespEntity;
+import com.example.storage.core.StorageManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -54,6 +57,7 @@ public class RetrofitFactory {
                 .client(createOkhttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory.create())
                 .build();
     }
 
@@ -157,6 +161,11 @@ public class RetrofitFactory {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
+                //获取本地Token
+                String localToken = StorageManager.getInstance().get("token");
+                if (!TextUtils.isEmpty(localToken)) {
+                    return resetRequest(request, localToken, chain);
+                }
                 Response response = chain.proceed(request);
 
                 if (checkHttpCode401(response)) {
@@ -164,9 +173,10 @@ public class RetrofitFactory {
                     if (TextUtils.isEmpty(token)) {
                         return response;
                     }
-                    Request.Builder builder = request.newBuilder().addHeader("Authorization", "bearer " + token);
-                    Request newRequest = builder.build();
-                    return chain.proceed(newRequest);
+                    //TODO:保存Token 到SP
+                    StorageManager.getInstance().save("token", token);
+
+                    return resetRequest(request, token, chain);
                 }
 
 
@@ -175,6 +185,19 @@ public class RetrofitFactory {
         };
         return interceptor;
     }
+
+    private Response resetRequest(Request request, String token, Interceptor.Chain chain) {
+        Request.Builder newBuilder = request.newBuilder().addHeader("Authorization", "bearer " + token);
+
+        Request newRequest = newBuilder.build();
+        try {
+            return chain.proceed(newRequest);
+        } catch (IOException e) {
+            LogUtils.d(e.getMessage());
+        }
+        return null;
+    }
+
 
     private String requestToken() {
         TokenApi tokenApi = create(TokenApi.class);

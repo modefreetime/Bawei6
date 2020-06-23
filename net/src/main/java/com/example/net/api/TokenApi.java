@@ -16,8 +16,8 @@ public interface TokenApi {
     Call<TokenRespEntity> getToken(@Field("grant_type")String type, @Field("username")String name, @Field("password")String pwd);
 
 
-    @Headers({Config.NEW_URLHEADER_KEY+":"+Config.NEW_URLHEADER_VALUE})
-    @POST("/login")
-    Call<TokenRespEntity> getTest();
+//    @Headers({Config.NEW_URLHEADER_KEY+":"+Config.NEW_URLHEADER_VALUE})
+//    @POST("/login")
+//    Call<TokenRespEntity> getTest();
 
 }

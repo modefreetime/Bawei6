@@ -8,10 +8,7 @@ import android.view.View;
 
 import com.example.common.utils.LogUtils;
 import com.example.core.view.BaseActivity;
-import com.example.net.RetrofitFactory;
 import com.example.net.protocol.BaseRespEntity;
-import com.example.net.protocol.TokenRespEntity;
-import com.example.net.rx.RXJAVA;
 import com.example.usercenter.R;
 import com.example.usercenter.databinding.ActivityLoginBinding;
 import com.example.usercenter.entity.UserEntity;
@@ -71,25 +68,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
         binding.setCommand(this);
     }
 
-    public void changeUrlClick(View view) {
-        UserApi userApi = RetrofitFactory
-                .getInstance()
-                .create(UserApi.class);
-        userApi.getTest()
-                .enqueue(new Callback<TokenRespEntity>() {
-                    @Override
-                    public void onResponse(Call<TokenRespEntity> call, Response<TokenRespEntity> response) {
-                        LogUtils.d("SUCCESS");
-                    }
 
-                    @Override
-                    public void onFailure(Call<TokenRespEntity> call, Throwable t) {
-                        LogUtils.d(t.getMessage());
-                    }
-                });
-    }
-    public void latestClick(View view){
-        RXJAVA.test();
-    }
 
 }

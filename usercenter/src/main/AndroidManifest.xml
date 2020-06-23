@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.usercenter">
     <application
+        android:name=".UserCenterApp"
         android:allowBackup="true"
         android:label="金融_用户模块"
         android:supportsRtl="true"

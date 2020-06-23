@@ -35,16 +35,7 @@
             android:layout_height="wrap_content"
             android:text="@string/user_ui_btnlogin" />
 
-        <Button
-            android:onClick="@{command::changeUrlClick}"
-            android:text="测试baseurl更换"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:onClick="@{command::latestClick}"
-            android:text="latest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </layout>

@@ -9,8 +9,10 @@ import com.example.common.utils.LogUtils;
 import com.example.core.model.IModel;
 import com.example.net.RetrofitFactory;
 import com.example.net.protocol.BaseRespEntity;
+import com.example.net.rx.BaseFlowabe;
 import com.example.net.rx.BaseObservable;
 import com.example.net.rx.BaseObserver;
+import com.example.net.rx.BaseSubscriber;
 import com.example.usercenter.entity.UserEntity;
 import com.example.usercenter.model.api.UserApi;
 
@@ -38,61 +40,78 @@ import retrofit2.Response;
 public class UserModel implements IModel {
 
     public LiveData<BaseRespEntity<UserEntity>> login(final UserEntity entity) {
-//        LogUtils.d(entity.getUsername());
-//        if(Looper.getMainLooper().getThread()==Thread.currentThread()){
-//            result.setValue(true);
-//        }else {
-//            result.postValue(true);
-//        }
-        final MutableLiveData<BaseRespEntity<UserEntity>> result = new MutableLiveData<>();
+//        final MutableLiveData<BaseRespEntity<UserEntity>> result = new MutableLiveData<>();
 
+        UserApi userApi = RetrofitFactory.getInstance().create(UserApi.class);
+        LiveData<BaseRespEntity<UserEntity>> login = userApi.login(entity);
+//        Flowable<BaseRespEntity<UserEntity>> flowable = userApi.login(entity);
+//        BaseFlowabe.doObservable(flowable, new BaseSubscriber<BaseRespEntity<UserEntity>>() {
+//            @Override
+//            public void onNext(BaseRespEntity<UserEntity> userEntityBaseRespEntity) {
+//                super.onNext(userEntityBaseRespEntity);
+//                if (userEntityBaseRespEntity.getCode() == -1) {
+//                    result.postValue(null);
+//                    return;
+//                }
+//                result.postValue(userEntityBaseRespEntity);
+//            }
+//
+//            @Override
+//            public void onError(Throwable t) {
+//                super.onError(t);
+//                result.postValue(null);
+//            }
+//        });
 
-        Flowable<BaseRespEntity<UserEntity>> flowable = Flowable.create(new FlowableOnSubscribe<BaseRespEntity<UserEntity>>() {
-            @Override
-            public void subscribe(final FlowableEmitter<BaseRespEntity<UserEntity>> emitter) throws Exception {
-                UserApi userApi = RetrofitFactory.getInstance().create(UserApi.class);
-                Call<BaseRespEntity<UserEntity>> call = userApi.login(entity);
-                call.enqueue(new Callback<BaseRespEntity<UserEntity>>() {
-                    @Override
-                    public void onResponse(Call<BaseRespEntity<UserEntity>> call, Response<BaseRespEntity<UserEntity>> response) {
-                        if (response.body().getCode() == -1) {
-                            emitter.onError(new RuntimeException("用户登录失败"));
-                            return;
-                        }
-                        emitter.onNext(response.body());
-                        emitter.onComplete();
-                    }
+        return login;
 
-                    @Override
-                    public void onFailure(Call<BaseRespEntity<UserEntity>> call, Throwable t) {
-                        emitter.onError(t);
-                    }
-                });
-            }
-        }, BackpressureStrategy.LATEST);
-        flowable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseRespEntity<UserEntity>>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
-                        s.request(Long.MAX_VALUE);
-                    }
+//        Flowable<BaseRespEntity<UserEntity>> flowable = Flowable.create(new FlowableOnSubscribe<BaseRespEntity<UserEntity>>() {
+//            @Override
+//            public void subscribe(final FlowableEmitter<BaseRespEntity<UserEntity>> emitter) throws Exception {
+//                UserApi userApi = RetrofitFactory.getInstance().create(UserApi.class);
+//                Call<BaseRespEntity<UserEntity>> call = userApi.login(entity);
+//                call.enqueue(new Callback<BaseRespEntity<UserEntity>>() {
+//                    @Override
+//                    public void onResponse(Call<BaseRespEntity<UserEntity>> call, Response<BaseRespEntity<UserEntity>> response) {
+//                        if (response.body().getCode() == -1) {
+//                            emitter.onError(new RuntimeException("用户登录失败"));
+//                            return;
+//                        }
+//                        emitter.onNext(response.body());
+//                        emitter.onComplete();
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<BaseRespEntity<UserEntity>> call, Throwable t) {
+//                        emitter.onError(t);
+//                    }
+//                });
+//            }
+//        }, BackpressureStrategy.LATEST);
 
-                    @Override
-                    public void onNext(BaseRespEntity<UserEntity> userEntityBaseRespEntity) {
-                        result.postValue(userEntityBaseRespEntity);
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        result.postValue(null);
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        flowable.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<BaseRespEntity<UserEntity>>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//                        s.request(Long.MAX_VALUE);
+//                    }
+//
+//                    @Override
+//                    public void onNext(BaseRespEntity<UserEntity> userEntityBaseRespEntity) {
+//                        result.postValue(userEntityBaseRespEntity);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        result.postValue(null);
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
 
 //        UserApi userApi = RetrofitFactory.getInstance().create(UserApi.class);
@@ -146,8 +165,6 @@ public class UserModel implements IModel {
 //                result.postValue(null);
 //            }
 //        });
-
-        return result;
     }
 
 }
