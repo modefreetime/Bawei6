@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="command"
+            type="com.example.MainActivity" />
+    </data>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <com.example.wiget.TitleBar
+                app:left_txt=" "
+                app:left_icon="@drawable/fanhui"
+                app:left_iocn_visible="true"
+                app:title_txt="登录"
+                app:right_txt=""
+                app:right_icon_visible="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/guangbo"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="300dp" />
+
+        <TextView
+            android:onClick="@{command::regi}"
+            android:textColor="@color/green"
+            android:text="注册新用户"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:onClick="@{command::login}"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:text="密码登录"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</layout>

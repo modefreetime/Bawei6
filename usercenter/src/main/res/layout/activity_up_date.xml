@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.usercenter.viewmodel.UserViewModel" />
+        <variable
+            name="command"
+            type="com.example.usercenter.view.UpDateActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.example.wiget.TitleBar
+            android:id="@+id/tb_bar"
+            app:left_txt=" "
+            app:left_icon="@drawable/fanhui"
+            app:left_iocn_visible="true"
+            app:title_txt="修改密码"
+            app:right_txt="修改"
+            app:right_icon_visible="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.example.wiget.TitleBar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:text="@={vm.updateEntity.username}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:hint="输入电话号码"></EditText>
+
+            <Button
+                android:onClick="@{command::getYzm}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/regi_btn_style"
+                android:text="发送验证码"
+                android:textColor="@color/colorPrimaryDark"></Button>
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="验证码"></EditText>
+
+        <EditText
+            android:text="@={vm.updateEntity.pwd}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入密码"
+            android:inputType="textPassword"></EditText>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="再次输入密码"
+            android:inputType="textPassword"></EditText>
+    </LinearLayout>
+
+
+</layout>

@@ -3,8 +3,12 @@ package com.example.usercenter.view;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.example.common.utils.LogUtils;
 import com.example.core.view.BaseActivity;
@@ -34,17 +38,15 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
             return;
         }
         LiveData<BaseRespEntity<UserEntity>> result = vm.login();
-//        if(result.getValue()){
-//            showMsg(this,getResources().getString(R.string.user_login_success));
-//
-//        }else{
-//            showMsg(this,getResources().getString(R.string.user_login_failed));
-//        }
         result.observe(this, new Observer<BaseRespEntity<UserEntity>>() {
             @Override
             public void onChanged(BaseRespEntity<UserEntity> userEntityBaseRespEntity) {
                 if (userEntityBaseRespEntity != null) {
-                    showMsg(LoginActivity.this, "成功");
+                    if(userEntityBaseRespEntity.getData()!=null) {
+                        showMsg(LoginActivity.this, "成功");
+                    }else{
+                        showMsg(LoginActivity.this, "失败");
+                    }
                 } else {
                     showMsg(LoginActivity.this, "失败");
                 }
@@ -68,6 +70,18 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
         binding.setCommand(this);
     }
 
+    public void rememberPwdOnclick(View view){
+        ((CheckBox)view).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                showMsg(LoginActivity.this,b+"");
+            }
+        });
+    }
+
+    public void forgetpwd(View view){
+        startActivity(new Intent(this,UpDateActivity.class));
+    }
 
 
 }

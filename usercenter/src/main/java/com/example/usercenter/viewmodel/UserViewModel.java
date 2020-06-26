@@ -10,6 +10,8 @@ import com.example.usercenter.repository.UserRepository;
 public class UserViewModel extends BaseViewModel {
 
     public UserEntity userEntity = new UserEntity();
+    public UserEntity regiEntity = new UserEntity();
+    public UserEntity updateEntity = new UserEntity();
 
     public UserViewModel(){
         registerRepository(UserRepository.class.getSimpleName(),new UserRepository());
@@ -19,4 +21,22 @@ public class UserViewModel extends BaseViewModel {
         UserRepository userRepository=getRepository(UserRepository.class.getSimpleName());
         return userRepository.login(userEntity);
     }
+    public LiveData<BaseRespEntity<UserEntity>> regi(){
+        UserRepository userRepository=getRepository(UserRepository.class.getSimpleName());
+        return userRepository.regi(regiEntity);
+    }
+
+    public LiveData<BaseRespEntity<String>> yzm(){
+        UserRepository userRepository=getRepository(UserRepository.class.getSimpleName());
+        return userRepository.yzm(regiEntity.getUsername());
+    }
+    public LiveData<BaseRespEntity<String>> updateYzm(){
+        UserRepository userRepository=getRepository(UserRepository.class.getSimpleName());
+        return userRepository.yzm(updateEntity.getUsername());
+    }
+    public LiveData<BaseRespEntity<Boolean>> update(){
+        UserRepository userRepository=getRepository(UserRepository.class.getSimpleName());
+        return userRepository.update(updateEntity.getUsername(),updateEntity.getPwd());
+    }
+
 }

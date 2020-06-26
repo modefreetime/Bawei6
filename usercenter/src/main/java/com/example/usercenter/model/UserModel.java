@@ -167,4 +167,22 @@ public class UserModel implements IModel {
 //        });
     }
 
+
+    public LiveData<BaseRespEntity<UserEntity>> regi(UserEntity entity){
+        UserApi userApi = RetrofitFactory.getInstance().create(UserApi.class);
+        LiveData<BaseRespEntity<UserEntity>> register = userApi.register(entity);
+        return register;
+    }
+
+    public LiveData<BaseRespEntity<String>> yzm(String phone){
+        UserApi userApi = RetrofitFactory.getInstance().create(UserApi.class);
+        LiveData<BaseRespEntity<String>> yzm = userApi.getYzm(phone);
+        return yzm;
+    }
+    public LiveData<BaseRespEntity<Boolean>> update(String userid,String pwd){
+        UserApi userApi = RetrofitFactory.getInstance().create(UserApi.class);
+        LiveData<BaseRespEntity<Boolean>> update = userApi.update(userid, pwd);
+        return update;
+    }
+
 }

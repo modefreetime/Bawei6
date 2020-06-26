@@ -38,4 +38,5 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':net')
     implementation project(path: ':storage')
+    implementation project(path: ':wiget')
 }

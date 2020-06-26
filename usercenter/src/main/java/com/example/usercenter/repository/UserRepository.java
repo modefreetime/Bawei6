@@ -20,4 +20,16 @@ public class UserRepository extends Repository<UserModel> {
       return mModel.login(entity);
     }
 
+    public LiveData<BaseRespEntity<UserEntity>> regi(UserEntity entity){
+        return mModel.regi(entity);
+    }
+
+    public LiveData<BaseRespEntity<String>> yzm(String phone){
+        return mModel.yzm(phone);
+    }
+
+    public LiveData<BaseRespEntity<Boolean>> update(String userid,String pwd){
+        return mModel.update(userid,pwd);
+    }
+
 }
