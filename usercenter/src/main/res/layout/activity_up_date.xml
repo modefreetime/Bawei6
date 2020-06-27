@@ -25,7 +25,7 @@
             app:right_txt="修改"
             app:right_icon_visible="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.example.wiget.TitleBar>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
-                android:hint="输入电话号码"></EditText>
+                android:hint="输入电话号码"/>
 
             <Button
                 android:onClick="@{command::getYzm}"
@@ -45,26 +45,26 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/regi_btn_style"
                 android:text="发送验证码"
-                android:textColor="@color/colorPrimaryDark"></Button>
+                android:textColor="@color/colorPrimaryDark"/>
         </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="验证码"></EditText>
+            android:hint="验证码"/>
 
         <EditText
             android:text="@={vm.updateEntity.pwd}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="输入密码"
-            android:inputType="textPassword"></EditText>
+            android:inputType="textPassword"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="再次输入密码"
-            android:inputType="textPassword"></EditText>
+            android:inputType="textPassword"/>
     </LinearLayout>
 
 

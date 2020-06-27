@@ -29,7 +29,7 @@
         <ImageView
             android:scaleType="center"
             android:layout_gravity="center"
-            android:src="@drawable/guangbo"
+            android:src="@drawable/logo"
             android:layout_width="match_parent"
             android:layout_height="250dp"></ImageView>
         <LinearLayout

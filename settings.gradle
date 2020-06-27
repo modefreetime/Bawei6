@@ -1,1 +1,1 @@
-include ':app', ':core', ':usercenter', ':common', ':net', ':storage', ':wiget'
+include ':app', ':core', ':usercenter', ':common', ':net', ':storage', ':wiget', ':home', ':finalce', ':account', ':more'
