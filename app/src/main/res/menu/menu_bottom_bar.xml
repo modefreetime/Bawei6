@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_bottom_bar_home"
+        android:icon="@mipmap/home"
+        android:title="@string/menu_bottom_bar_home" />
+    <item
+        android:id="@+id/menu_bottom_bar_finalce"
+        android:icon="@mipmap/finalce"
+        android:title="@string/menu_bottom_bar_finalce" />
+    <item
+        android:id="@+id/menu_bottom_bar_account"
+        android:icon="@mipmap/account"
+        android:title="@string/menu_bottom_bar_account" />
+    <item
+        android:id="@+id/menu_bottom_bar_more"
+        android:icon="@mipmap/more"
+        android:title="@string/menu_bottom_bar_more" />
+</menu>

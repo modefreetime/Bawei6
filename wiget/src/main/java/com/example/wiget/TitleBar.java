@@ -19,6 +19,11 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
     private TextView left;
     private TextView title;
     private TextView right;
+    /**
+     * 图标宽高
+     */
+    private final int ICON_WH=50;
+
 
     public TitleBar(Context context) {
         super(context);
@@ -64,6 +69,8 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
             String right_txt=typedArray.getString(R.styleable.TitleBar_right_txt);
             int right_icon=typedArray.getResourceId(R.styleable.TitleBar_right_icon,0);
             boolean right_icon_visible=typedArray.getBoolean(R.styleable.TitleBar_right_icon_visible,false);
+            int icon_wh = typedArray.getInt(R.styleable.TitleBar_icon_wh, ICON_WH);
+            float size = typedArray.getFloat(R.styleable.TitleBar_title_size, 20);
 
             //处理左侧按钮
             if (!TextUtils.isEmpty(left_txt))
@@ -72,7 +79,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
             }
             if (left_icon!=0){
                 Drawable drawable = context.getDrawable(left_icon);
-                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                drawable.setBounds(0, 0, icon_wh, icon_wh);
                 left.setCompoundDrawables(drawable,null,null,null);
             }
             if (left_icon_visible){
@@ -86,6 +93,8 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
             if (!TextUtils.isEmpty(title_txt)){
                 title.setText(title_txt);
             }
+            //设置标题字体大小
+            title.setTextSize(size);
 
             if (!TextUtils.isEmpty(right_txt)){
                 right.setText(right_txt);
@@ -93,7 +102,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
 
             if (right_icon!=0){
                 Drawable drawable = context.getDrawable(right_icon);
-                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                drawable.setBounds(0, 0, icon_wh, icon_wh);
                 right.setCompoundDrawables(drawable,null,null,null);
             }
             if (right_icon_visible){
@@ -129,4 +138,12 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         void leftClick(View view);
         void rightClick(View view);
     }
+
+    public void setLeftVisible(boolean b){
+        this.left.setVisibility(b?VISIBLE:INVISIBLE);
+    }
+    public void setRightVisible(boolean b){
+        this.right.setVisibility(b?VISIBLE:INVISIBLE);
+    }
+
 }

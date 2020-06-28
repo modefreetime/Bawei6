@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">梧桐金融</string>
+    <string name="menu_bottom_bar_home">主页</string>
+    <string name="menu_bottom_bar_finalce">理财</string>
+    <string name="menu_bottom_bar_account">账户</string>
+    <string name="menu_bottom_bar_more">更多</string>
+    <string name="menu_header_button">登录或者注册</string>
+
+</resources>

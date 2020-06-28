@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 def appInfo = rootProject.ext.Android
-
+def libs = rootProject.ext.dependencies
 android {
     compileSdkVersion appInfo.compileSdkVersion
     buildToolsVersion appInfo.buildToolsVersion
@@ -31,7 +31,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation libs.materal
+
     implementation project(path: ':common')
+
     if(!IS_HOME_APP.toBoolean()){
         implementation project(path: ':home')
     }

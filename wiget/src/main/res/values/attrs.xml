@@ -10,5 +10,7 @@
         <attr name="right_txt" format="string"></attr>
         <attr name="right_icon" format="reference"></attr>
         <attr name="right_icon_visible" format="boolean"></attr>
+        <attr name="icon_wh" format="integer"></attr>
+        <attr name="title_size" format="float"></attr>
     </declare-styleable>
 </resources>
