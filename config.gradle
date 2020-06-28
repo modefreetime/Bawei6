@@ -18,7 +18,8 @@ ext {
             rxjava        : "2.2.5",
             okhttplog     : "3.5.0",
             glide         : "4.9.0",
-            design: "1.1.0"
+            design        : "1.1.0",
+            banner        : "1.4.10"
     ]
     dependencies = [
             retrofit      : "com.squareup.retrofit2:retrofit:$dependenciesVersion.retrofit",
@@ -29,7 +30,8 @@ ext {
             rxandroid     : "io.reactivex.rxjava2:rxandroid:$dependenciesVersion.rxandroid",
             rxjava        : "io.reactivex.rxjava2:rxjava:$dependenciesVersion.rxjava",
             glide         : "com.github.bumptech.glide:glide:$dependenciesVersion.glide",
-            materal        : "com.google.android.material:material:$dependenciesVersion.design"
+            materal       : "com.google.android.material:material:$dependenciesVersion.design",
+            banner        : "com.youth.banner:banner:$dependenciesVersion.banner"
     ]
     url = [
             debug        : "http://api.zydeveloper.com:7077/",

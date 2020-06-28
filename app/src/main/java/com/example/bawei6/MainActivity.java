@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.account.AccountFragment;
 import com.example.bawei6.adapter.FragmentViewPagerAdapter;
 import com.example.finalce.FinalceFragment;
-import com.example.home.HomeFragment;
+import com.example.home.view.HomeFragment;
 import com.example.more.MoreFragment;
 import com.example.wiget.TitleBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

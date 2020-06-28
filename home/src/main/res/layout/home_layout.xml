@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:text="home页面"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <data>
+        <variable
+            name="mine"
+            type="com.example.home.view.HomeFragment" />
+    </data>
 
-</LinearLayout>
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner_home_main"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_h" />
+
+            <ViewFlipper
+                android:id="@+id/vf_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/lightgray"
+                android:inAnimation="@anim/anim_in"
+                android:outAnimation="@anim/anim_out">
+
+            </ViewFlipper>
+
+            <include
+                layout="@layout/layout_newproject"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/newproj" />
+            
+            <ImageView
+                android:scaleType="fitXY"
+                app:imgSrc="@{mine.imagePath}"
+                android:id="@+id/iv_adv"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+            <include layout="@layout/layout_project" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        </LinearLayout>
+    
+    </ScrollView>
+
+
+</layout>

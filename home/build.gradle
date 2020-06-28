@@ -4,7 +4,7 @@ if (IS_HOME_APP.toBoolean()){
     apply plugin: 'com.android.library'
 }
 apply plugin: 'com.android.library'
-
+def libs =rootProject.ext.dependencies
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -26,6 +26,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding{
+        enabled=true
+    }
     sourceSets{
         main{
             if (IS_HOME_APP.toBoolean()){
@@ -44,5 +47,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
+
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation libs.banner
+    implementation project(path: ':core')
+    implementation project(path: ':common')
+
+    implementation project(path: ':net')
+    implementation project(path: ':storage')
+    implementation project(path: ':wiget')
 }

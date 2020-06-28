@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="titlebar_wh">50dp</dimen>
+    <dimen name="titlebar_wh">40dp</dimen>
     <dimen name="icon_wh">50</dimen>
+    <dimen name="banner_h">160dp</dimen>
 
 </resources>

@@ -17,12 +17,13 @@ public abstract class BaseFragment<Binding extends ViewDataBinding, VM extends B
 
     protected Binding binding;
     protected VM vm;
+    protected View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        View view = binding.getRoot();
+        view = binding.getRoot();
         vm = createVm();
 
         return view;
@@ -34,11 +35,23 @@ public abstract class BaseFragment<Binding extends ViewDataBinding, VM extends B
      * @return
      */
     protected abstract VM createVm();
-
+    protected abstract void initBinding();
     protected abstract int getLayoutId();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initBinding();
+        initView();
+        initData();
+        initEvent();
     }
+
+    protected abstract void initView();
+
+    protected abstract void initData();
+
+
+    protected abstract void initEvent();
+
 }
