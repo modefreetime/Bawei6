@@ -102,8 +102,8 @@ public class HomeFragment extends BaseFragment<HomeLayoutBinding, HomeViewModel>
         product.observe(getActivity(), new Observer<BaseRespEntity<List<ProductEntity>>>() {
             @Override
             public void onChanged(BaseRespEntity<List<ProductEntity>> listBaseRespEntity) {
-                List<ProductEntity> data = listBaseRespEntity.getData();
-                if(data !=null){
+                if(listBaseRespEntity !=null && listBaseRespEntity.getData()!=null){
+                    List<ProductEntity> data = listBaseRespEntity.getData();
                     pro_name.setText(data.get(0).getProductname());
                     pro_num.setText(data.get(0).getYearrate()*100+"%");
                     pro_amount.setText("起投金额:"+data.get(0).getMinbugamount()+"元");

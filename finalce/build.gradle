@@ -4,6 +4,7 @@ if (IS_FINALCE_APP.toBoolean()){
     apply plugin: 'com.android.library'
 }
 apply plugin: 'com.android.library'
+def libs =rootProject.ext.dependencies
 
 android {
     compileSdkVersion 29
@@ -35,6 +36,9 @@ android {
             }
         }
     }
+    dataBinding{
+        enabled=true
+    }
 
 }
 
@@ -45,4 +49,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation libs.smart
+    implementation libs.smartheader
+    implementation libs.smartfooted
+    implementation project(path: ':core')
+    implementation project(path: ':wiget')
+    implementation project(path: ':net')
+    implementation project(path: ':common')
 }

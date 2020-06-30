@@ -21,8 +21,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding{
-        enabled=true
+    dataBinding {
+        enabled = true
     }
 
 }
@@ -42,5 +42,6 @@ dependencies {
     api dep.rxandroid
     api dep.rxjava
     api dep.glide
+    api dep.materal
 
 }

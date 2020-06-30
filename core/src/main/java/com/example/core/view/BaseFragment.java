@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,5 +54,9 @@ public abstract class BaseFragment<Binding extends ViewDataBinding, VM extends B
 
 
     protected abstract void initEvent();
+
+    protected void showMsg(String msg){
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+    }
 
 }
