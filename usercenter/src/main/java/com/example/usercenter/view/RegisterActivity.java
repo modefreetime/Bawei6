@@ -24,7 +24,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding,UserV
 
     @Override
     protected UserViewModel createVm() {
-        return new UserViewModel();
+        return new UserViewModel(this);
     }
 
     @Override

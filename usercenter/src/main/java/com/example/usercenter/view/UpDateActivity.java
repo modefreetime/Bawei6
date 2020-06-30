@@ -23,7 +23,7 @@ public class UpDateActivity extends BaseActivity<ActivityUpDateBinding, UserView
 
     @Override
     protected UserViewModel createVm() {
-        return new UserViewModel();
+        return new UserViewModel(this);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class UpDateActivity extends BaseActivity<ActivityUpDateBinding, UserView
     protected void initBinding() {
         binding= DataBindingUtil.setContentView(this,R.layout.activity_up_date);
         binding.setCommand(this);
-        binding.setVm(new UserViewModel());
+        binding.setVm(new UserViewModel(this));
         titleBar=findViewById(R.id.tb_bar);
         titleBar.setTitleBarClickListener(new TitleBar.TitleBarClickListener() {
             @Override

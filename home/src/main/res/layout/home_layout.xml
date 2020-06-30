@@ -8,7 +8,13 @@
             type="com.example.home.view.HomeFragment" />
     </data>
 
-
+<com.scwang.smart.refresh.layout.SmartRefreshLayout
+    android:id="@+id/smrl_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <com.scwang.smart.refresh.header.BezierRadarHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     <ScrollView
         android:scrollbars="none"
         android:layout_width="match_parent"
@@ -39,7 +45,7 @@
                 layout="@layout/layout_newproject"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/newproj" />
-            
+
             <ImageView
                 android:scaleType="fitXY"
                 app:imgSrc="@{mine.imagePath}"
@@ -48,8 +54,11 @@
                 android:layout_height="60dp" />
             <include layout="@layout/layout_project" android:layout_width="match_parent" android:layout_height="wrap_content"/>
         </LinearLayout>
-    
-    </ScrollView>
 
+    </ScrollView>
+        <com.scwang.smart.refresh.footer.BallPulseFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+</com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </layout>

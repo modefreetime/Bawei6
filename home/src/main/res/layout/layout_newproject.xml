@@ -9,7 +9,53 @@
         android:layout_margin="20dp"
         android:background="@drawable/item_style_1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_product_num"
+            android:textSize="30sp"
+            android:textColor="#D62F2F"
+            android:layout_alignLeft="@id/tv_product_name"
+            android:layout_below="@id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_product_amount"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@id/tv_product_amount"
+            android:id="@+id/tv_product_day"
+            android:layout_marginTop="10dp"
+            android:layout_alignLeft="@id/tv_product_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_border_background"
+            android:layout_marginTop="10dp"
+            android:layout_alignTop="@id/tv_product_amount"
+            android:layout_toRightOf="@id/tv_product_amount"
+            android:textColor="@color/deepskyblue"
+            android:text="立即抢购"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
 
     <TextView
         android:gravity="center"

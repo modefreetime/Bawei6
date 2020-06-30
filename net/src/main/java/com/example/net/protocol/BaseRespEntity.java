@@ -5,6 +5,10 @@ public class BaseRespEntity<T> {
     private T data;
     private String msg;
 
+    public BaseRespEntity(T data) {
+        this.data = data;
+    }
+
     public int getCode() {
         return code;
     }

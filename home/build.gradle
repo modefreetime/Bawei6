@@ -50,6 +50,11 @@ dependencies {
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation libs.banner
+    implementation libs.room
+    annotationProcessor libs.roomcompiler
+    implementation libs.smart
+    implementation libs.smartheader
+    implementation libs.smartfooted
     implementation project(path: ':core')
     implementation project(path: ':common')
 

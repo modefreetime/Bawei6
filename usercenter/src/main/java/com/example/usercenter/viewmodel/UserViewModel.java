@@ -1,5 +1,6 @@
 package com.example.usercenter.viewmodel;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.core.viewmodel.BaseViewModel;
@@ -13,8 +14,9 @@ public class UserViewModel extends BaseViewModel {
     public UserEntity regiEntity = new UserEntity();
     public UserEntity updateEntity = new UserEntity();
 
-    public UserViewModel(){
-        registerRepository(UserRepository.class.getSimpleName(),new UserRepository());
+    public UserViewModel(LifecycleOwner owner){
+        super(owner);
+        registerRepository(UserRepository.class.getSimpleName(),new UserRepository(super.owner));
     }
 
     public LiveData<BaseRespEntity<UserEntity>> login(){

@@ -2,6 +2,7 @@ package com.example.core.viewmodel;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 
@@ -12,10 +13,12 @@ import java.util.Map;
 
 public class BaseViewModel extends ViewModel implements LifecycleObserver {
 
+    protected LifecycleOwner owner;
     protected Map<String, Repository> repositoryMap;
 
-    public BaseViewModel() {
+    public BaseViewModel(LifecycleOwner _owner) {
         repositoryMap = new HashMap<>();
+        this.owner=_owner;
     }
 
     /**
